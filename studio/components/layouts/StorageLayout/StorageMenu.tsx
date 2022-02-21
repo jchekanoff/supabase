@@ -22,7 +22,7 @@ interface Props {}
 const StorageMenu: FC<Props> = () => {
   const router = useRouter()
   const { ref, bucketId } = router.query
-  const page = router.pathname.split('/')[4] as undefined | 'policies' | 'usage'
+  const page = router.pathname.split('/')[4] as undefined | 'policies' | 'settings' | 'usage'
 
   const { ui } = useStore()
   const projectRef = ui.selectedProject?.ref
@@ -88,10 +88,17 @@ const StorageMenu: FC<Props> = () => {
       <div className="mx-4 flex flex-col space-y-2">
         <div className="mx-4 space-y-1">
           <Typography.Text type="secondary" small>
-            Settings
+            Config
           </Typography.Text>
         </div>
         <div className="dash-product-menu space-y-1">
+          <Link href={`/project/${projectRef}/storage/settings`}>
+            <a className="block">
+              <Menu.Item rounded active={page === 'settings'}>
+                <Typography.Text className="truncate">Settings</Typography.Text>
+              </Menu.Item>
+            </a>
+          </Link>
           <Link href={`/project/${projectRef}/storage/policies`}>
             <a className="block">
               <Menu.Item rounded active={page === 'policies'}>
