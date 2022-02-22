@@ -88,7 +88,7 @@ const StorageMenu: FC<Props> = () => {
       <div className="mx-4 flex flex-col space-y-2">
         <div className="mx-4 space-y-1">
           <Typography.Text type="secondary" small>
-            Config
+            Configuration
           </Typography.Text>
         </div>
         <div className="dash-product-menu space-y-1">
