@@ -1,12 +1,12 @@
-import Link from 'next/link'
 import React, { FC, useState, useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
-import { Button, Typography, IconClock, IconInfo } from '@supabase/ui'
+import { Typography, IconInfo } from '@supabase/ui'
 
 import { useStore } from 'hooks'
 import { STRIPE_PRODUCT_IDS } from 'lib/constants'
 import BackupItem from './BackupItem'
 import Loading from 'components/ui/Loading'
+import UpgradeToPro from 'components/ui/UpgradeToPro'
 import Panel from 'components/to-be-cleaned/Panel'
 
 interface Props {}
@@ -49,34 +49,11 @@ const BackupsList: FC<Props> = ({}) => {
       </div> */}
 
       {tierId === STRIPE_PRODUCT_IDS.FREE && (
-        <div
-          className={[
-            'block w-full p-3 px-6 border rounded border-opacity-20',
-            'bg-gray-100 border-gray-600',
-            'dark:bg-gray-600 dark:border-gray-500',
-          ].join(' ')}
-        >
-          <div className="flex space-x-3">
-            <div className="mt-1">
-              <IconClock size="large" />
-            </div>
-            <div className="flex justify-between w-full items-center">
-              <div>
-                <Typography.Text>Free Plan does not include project backups.</Typography.Text>
-                <div>
-                  <Typography.Text type="secondary">
-                    Please upgrade to Pro plan for up to 7 days of backups.
-                  </Typography.Text>
-                </div>
-              </div>
-              <Link href={`/project/${projectRef}/settings/billing`}>
-                <Button type="primary" className="flex-grow">
-                  Upgrade to Pro
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
+        <UpgradeToPro
+          primaryText="Free Plan does not include project backups."
+          projectRef={projectRef}
+          secondaryText="Please upgrade to Pro plan for up to 7 days of backups."
+        />
       )}
 
       {!sortedBackups.length && tierId !== STRIPE_PRODUCT_IDS.FREE ? (
